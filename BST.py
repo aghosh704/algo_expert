@@ -34,12 +34,27 @@ def minHeightBstHelper(array, from_index, to_index, tree=None):
     return tree
 
 
+def findKthLargestValueInBst(tree, k):
+    tree_vals = findKthLargestValueInBstHelper(tree, k)
+
+    return tree_vals[len(tree_vals) - k]
+
+
+def findKthLargestValueInBstHelper(tree, k, vals=[]):
+    if tree is not None:
+        findKthLargestValueInBstHelper(tree.left, k, vals)
+        vals.append(tree.value)
+        findKthLargestValueInBstHelper(tree.right, k, vals)
+    return vals
+
+
 def printTree(node, level=0):
     if node is not None:
         printTree(node.left, level + 1)
         print(' ' * 4 * level + '->', node.value)
         printTree(node.right, level + 1)
 
-arr = [1, 2, 5, 7, 10, 13, 14, 15, 22]
+arr = [10, 8, 9, 6, 7, 4, 5, 2, 3]
 obj = minHeightBst(arr)
 printTree(obj)
+print(findKthLargestValueInBst(obj, 4))
