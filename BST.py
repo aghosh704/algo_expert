@@ -47,14 +47,55 @@ def findKthLargestValueInBstHelper(tree, k, vals=[]):
         findKthLargestValueInBstHelper(tree.right, k, vals)
     return vals
 
-
 def printTree(node, level=0):
     if node is not None:
         printTree(node.left, level + 1)
         print(' ' * 4 * level + '->', node.value)
         printTree(node.right, level + 1)
 
-arr = [10, 8, 9, 6, 7, 4, 5, 2, 3]
-obj = minHeightBst(arr)
-printTree(obj)
-print(findKthLargestValueInBst(obj, 4))
+
+def pre_order_traverse(node, arr=[]):
+    if node is not None:
+        arr.append(node.value)
+        pre_order_traverse(node.left, arr)
+        pre_order_traverse(node.right, arr)
+    return arr
+
+
+def in_order_traverse(node, arr=[]):
+    if node is not None:
+        in_order_traverse(node.left, arr)
+        arr.append(node.value)
+        in_order_traverse(node.right, arr)
+    return arr
+
+def post_order_traverse(node, arr=[]):
+    if node is not None:
+        post_order_traverse(node.left, arr)
+        post_order_traverse(node.right, arr)
+        arr.append(node.value)
+    return arr
+
+
+def main1():
+    arr = [10, 8, 9, 6, 7, 4, 5, 2, 3]
+    pot_arr = [6, 3, 2, 4, 5, 8, 7, 9, 10]
+    arr = sorted(arr)
+    obj = minHeightBst(arr)
+    printTree(obj)
+    print(findKthLargestValueInBst(obj, 4))
+    pre_order_traverse(obj)
+def main2():
+    arr = [2, 3, 4, 5, 6, 7, 8]
+    tree = minHeightBst(arr)
+    printTree(tree)
+    pot = pre_order_traverse(tree)
+    iot = in_order_traverse(tree)
+    pst = post_order_traverse(tree)
+    print(pot)
+    print(iot)
+    print(pst)
+
+
+if __name__ == "__main__":
+    main2()
