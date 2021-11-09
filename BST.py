@@ -16,3 +16,30 @@ class BST:
             else:
                 self.right.insert(value)
 
+
+def minHeightBst(array):
+    return minHeightBstHelper(array, 0, len(array) - 1)
+
+
+def minHeightBstHelper(array, from_index, to_index, tree=None):
+    if from_index > to_index:
+        return tree
+    mid = (to_index + from_index) // 2
+    if tree is None:
+        tree = BST(array[mid])
+    else:
+        tree.insert(array[mid])
+    minHeightBstHelper(array, from_index, mid-1, tree)
+    minHeightBstHelper(array, mid+1, to_index, tree)
+    return tree
+
+
+def printTree(node, level=0):
+    if node is not None:
+        printTree(node.left, level + 1)
+        print(' ' * 4 * level + '->', node.value)
+        printTree(node.right, level + 1)
+
+arr = [1, 2, 5, 7, 10, 13, 14, 15, 22]
+obj = minHeightBst(arr)
+printTree(obj)
