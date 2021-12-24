@@ -11,11 +11,5 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-    print(array)
-    array = [1,2,3]
-    for idx, num in enumerate(array):
-        print(idx, num)
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    x = [1, 2, 3, 4, 5]
+    print(x[1:3])
